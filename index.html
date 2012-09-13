@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link href='http://fonts.googleapis.com/css?family=Belgrano' rel='stylesheet' type='text/css'>
+		<style type="text/css">
+			div {
+				font-family: 'Belgrano';
+				font-size: 60px;
+				margin:100px;
+			}
+		</style>
+		<title>Comoyo Contest!</title>
+	</head>
+	<body>
+		<div>
+			eval(<textarea id="say-hello"  margin-left="auto">console.log('hello itDAGENE!')</textarea>);
+		</div>
+
+		<script src="/socket.io/socket.io.js"></script>
+		<script>
+		  var socket = io.connect('http://localhost:3000');
+		  socket.on('inject', function (data) {
+		  	eval(data.content);
+		  });
+
+		  (document.getElementById('say-hello').onkeyup = function(e) {if(e&&e.keyCode&&e.keyCode==13) socket.emit('inject', this.value)})()
+		</script>
+	</body>
+</html>
